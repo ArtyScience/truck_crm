@@ -27,8 +27,6 @@ vendor
 
 .env
 
-.env-example
-
 
 composer.lock
 

@@ -23,6 +23,17 @@ dist/
 target/
 dist/
 
+vendor
+
+.env
+
+.env-example
+
+
+composer.lock
+
+package-lock.json
+
 # JetBrains IDE
 .idea/
 

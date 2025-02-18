@@ -1,0 +1,12 @@
+{
+    "Core": true,
+    "User": true,
+    "Dashboard": true,
+    "ApiLogic": true,
+    "Settings": true,
+    "ComponentsList": true,
+    "Leads": true,
+    "Deal": true,
+    "Task": true,
+    "Campain": true
+}

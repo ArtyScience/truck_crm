@@ -1,0 +1,31 @@
+{
+    "name": "nwidart/componentslist",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\ComponentsList\\": "",
+            "Modules\\ComponentsList\\App\\": "app/",
+            "Modules\\ComponentsList\\Database\\Factories\\": "database/factories/",
+            "Modules\\ComponentsList\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\ComponentsList\\Tests\\": "tests/"
+        }
+    }
+}

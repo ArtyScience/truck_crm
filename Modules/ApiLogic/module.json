@@ -1,0 +1,11 @@
+{
+    "name": "ApiLogic",
+    "alias": "apilogic",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ApiLogic\\Providers\\ApiLogicServiceProvider"
+    ],
+    "files": []
+}

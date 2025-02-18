@@ -1,0 +1,11 @@
+{
+    "name": "Campain",
+    "alias": "campain",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Campain\\Providers\\CampainServiceProvider"
+    ],
+    "files": []
+}

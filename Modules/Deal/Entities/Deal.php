@@ -62,7 +62,7 @@ class Deal extends Model
 
         if ($role !== 'ADMIN') {
             $statistics = $statistics->where(
-                'leads.user_id', Auth::user()->id);
+                'deals.user_id', Auth::user()->id);
         }
 
         $statistics = $statistics->where('deals.user_id', Auth::user()->id)

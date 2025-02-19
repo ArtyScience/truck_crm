@@ -255,9 +255,21 @@ class LeadService
         Lead::where('id', $id)->update($lead);
         LeadComodity::where('lead_id', $id)->delete();
 
-        LeadCompany::where('lead_id', $id)->update([
-            'name' => $request->get('company')
-        ]);
+        $check_company = Company::where('name', $request->get('company'))->first();
+
+        if (!is_null($check_company)) {
+            LeadCompany::where('lead_id', $id)->delete();
+            LeadCompany::create(['lead_id' => $id, 'company_id' => $check_company->id]);
+        } else {
+            LeadCompany::where('lead_id', $id)->delete();
+            $created_company = Company::create([
+                'name' => $request->get('company'),
+                'phone' => $request->get('phone'),
+                'email' => $request->get('email'),
+                'address' => $request->get('full_location')['formatted_address'],
+            ]);
+            LeadCompany::create(['lead_id' => $id, 'company_id' => $created_company->id]);
+        }
 
         $comodities = $request->get('comodities_list');
         foreach ($comodities as $comodity) {

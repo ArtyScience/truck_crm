@@ -411,6 +411,7 @@ export default {
                    :show="true"
                    :edit="true"
                    :remove="true"
+                   :call="true"
                    v-model:data="leads"
                    :headers="headers"
                    :body_columns_skip="body_columns_skip">

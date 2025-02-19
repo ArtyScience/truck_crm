@@ -1,12 +1,12 @@
 <script>
-import {CogIcon, EyeIcon, PencilIcon, TrashIcon, InformationCircleIcon,
+import {CogIcon, EyeIcon, PencilIcon, TrashIcon, InformationCircleIcon, PhoneIcon,
     ArrowNarrowUpIcon, ArrowNarrowDownIcon, PlusIcon} from '@heroicons/vue/solid'
 import Button from "./Button.vue";
 import Badge from "./Badge.vue";
 
 export default {
     name: "Table",
-    components: {Badge, Button, CogIcon, EyeIcon, PencilIcon, TrashIcon,
+    components: {Badge, Button, CogIcon, EyeIcon, PencilIcon, TrashIcon, PhoneIcon,
         ArrowNarrowUpIcon, ArrowNarrowDownIcon, PlusIcon, InformationCircleIcon},
     emits: ['show:item', 'remove:item', 'edit:item'],
     props: {
@@ -25,7 +25,8 @@ export default {
         edit: Boolean,
         edit_loading: Boolean,
         remove: Boolean,
-        remove_loading: Boolean
+        remove_loading: Boolean,
+        call: Boolean,
     },
     data() {
         return {
@@ -44,6 +45,9 @@ export default {
         this.result = this.data
     },
     methods: {
+        makeCall(phone) {
+          window.location.href = "tel:" + phone;
+        },
         skipColumn(column) {
             for (const key in this.body_columns_skip) {
                 if (this.body_columns_skip[key] === column) {
@@ -160,6 +164,18 @@ export default {
                         <div
                             style="z-index: 100"
                             class="buttons_wrapper pt-2 w-[150px] flex justify-end">
+                            <Button
+                                v-if="call"
+                                title="Call"
+                                aditional_classes="mr-2"
+                                @clicked="makeCall(item.phone)"
+                                type="success">
+                              <template #icon_after>
+                                <div style="width: 11px; padding: 0px 0px; border-radius: 100px">
+                                  <PhoneIcon />
+                                </div>
+                              </template>
+                            </Button>
                             <Button
                                 v-if="show"
                                 title="Show"

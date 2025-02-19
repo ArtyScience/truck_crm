@@ -2,8 +2,13 @@
 
 namespace Modules\Deal\Entities;
 
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Modules\Leads\Entities\Lead;
+use phpseclib3\Net\SFTP;
 
 class Deal extends Model
 {
@@ -45,4 +50,40 @@ class Deal extends Model
 
         return $deal;
     }
+
+    public static function getDealStatistics(): mixed
+    {
+        $role = User::getUserRole();
+
+        $statistics = Deal::selectRaw('
+                    DATE(created_at) as day,
+                    COUNT(*) as total_rows')
+            ->groupBy('day')->orderBy('day', 'ASC');
+
+        if ($role !== 'ADMIN') {
+            $statistics = $statistics->where(
+                'leads.user_id', Auth::user()->id);
+        }
+
+        $statistics = $statistics->where('deals.user_id', Auth::user()->id)
+            ->whereBetween('created_at', [
+                Carbon::now()->startOfWeek(),
+                Carbon::now()->endOfWeek() ])->get();
+
+        return $statistics;
+    }
+
+    public static function getStatusesCount($status_id)
+    {
+        $role = User::getUserRole();
+
+        $statuses = Deal::where('status_id', $status_id);
+
+        if ($role !== 'ADMIN') {
+            $statuses = $statuses->where('user_id', Auth::id());
+        }
+
+        return $statuses->count();
+    }
+
 }

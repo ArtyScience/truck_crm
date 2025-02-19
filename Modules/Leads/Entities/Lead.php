@@ -2,6 +2,8 @@
 
 namespace Modules\Leads\Entities;
 
+use App\Models\User;
+use Carbon\Carbon;
 use Database\Factories\LeadFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -49,6 +51,8 @@ class Lead extends Model
         $comodities_subquery = self::comoditySubQuery();
         $lead_companies_subquery = self::companySubQuery();
 
+        $role = User::getUserRole();
+
         $lead_query = Lead::select('leads.id', 'company',
             'leads.name',
             'leads.email', 'leads.phone', 'leads.notes',
@@ -63,8 +67,11 @@ class Lead extends Model
             ->leftJoinSub($lead_companies_subquery, 'lead_companies', function ($join) {
                 $join->on('lead_companies.lead_id', '=', 'leads.id');
             })
-            ->where('user_id', Auth::user()->id)
             ->groupBy('leads.id')->orderBy('leads.id', 'DESC');
+
+        if ($role !== 'ADMIN') {
+            $lead_query = $lead_query->where('user_id', Auth::user()->id);
+        }
 
         return $lead_query;
     }
@@ -122,5 +129,25 @@ class Lead extends Model
             ->leftJoin('lead_address', 'lead_address.lead_id', '=', 'leads.id')
             ->where('leads.user_id', Auth::id())->where('state', '!=', null)
             ->where('state', '!=', '')->groupBy('state')->having('y', '>', 0)->get();
+    }
+
+    public static function getLeadsStatistics()
+    {
+        $role = User::getUserRole();
+        $statistics = Lead::selectRaw('
+                    DATE(created_at) as day,
+                    COUNT(*) as total_rows')
+            ->groupBy('day')->orderBy('day', 'ASC');
+
+        if ($role !== 'ADMIN') {
+            $statistics = $statistics->where(
+                'leads.user_id', Auth::user()->id);
+        }
+
+        $statistics = $statistics->whereBetween('created_at', [
+                Carbon::now()->startOfWeek(),
+                Carbon::now()->endOfWeek() ])->get();
+
+        return $statistics;
     }
 }

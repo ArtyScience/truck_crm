@@ -39,7 +39,9 @@ class Status extends Model
 
     private static function dealsSubQuery(): Builder
     {
-        return DB::table('deals')
+        $role = User::getUserRole();
+
+        $deals = DB::table('deals')
             ->select(
                 'deals.status_id',
                 DB::raw('
@@ -80,8 +82,13 @@ class Status extends Model
             ->leftJoin('deals_details', 'deals_details.deal_id', '=', 'deals.id')
             ->leftJoin('deal_locations', 'deal_locations.deal_id', '=', 'deals.id')
             ->leftJoin('leads', 'leads.id', '=', 'deals.lead_id')
-            ->where('deals.user_id', Auth::user()->id)
             ->groupBy('deals.status_id')
             ->distinct();
+
+        if ($role !== 'ADMIN') {
+            $deals = $deals->where('deals.user_id', Auth::user()->id);
+        }
+
+        return $deals;
     }
 }

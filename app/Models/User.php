@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Scout\Searchable;
 use Spatie\Permission\Traits\HasRoles;
@@ -59,5 +60,18 @@ class User extends Authenticatable
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['created_at'])
             ->locale('en_EN')->isoFormat('D MMM YYYY');
+    }
+
+    public static function getUserRole(): string
+    {
+        $role = '';
+        $user = Auth::user();
+
+        if ($user) {
+            $roles = $user->getRoleNames();
+            $role = $roles->first();
+        }
+
+        return $role;
     }
 }

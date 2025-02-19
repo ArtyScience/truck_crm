@@ -4,6 +4,7 @@ namespace Modules\Dashboard\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Dashboard\Services\DashboardService;
 
 class DashboardServiceProvider extends ServiceProvider
 {
@@ -38,6 +39,10 @@ class DashboardServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+
+        $this->app->singleton(DashboardService::class, function ($app) {
+            return new DashboardService();
+        });
     }
 
     /**

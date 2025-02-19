@@ -246,7 +246,7 @@ export default {
                 <Button
                     @click="createItem"
                     type="primary"
-                    title="Create Lead"
+                    title="Create User"
                     class="cursor-pointer ml-auto mt-1.5" >
                     <template #icon_after>
                         <PlusIcon class="" style="width: 15px;"/>

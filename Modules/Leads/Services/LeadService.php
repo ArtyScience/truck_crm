@@ -4,6 +4,7 @@ namespace Modules\Leads\Services;
 
 use App\Http\Requests\LeadCreateRequest;
 use App\Http\Requests\LeadUpdateRequest;
+use App\Models\Company;
 use App\Models\Status;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -206,7 +207,21 @@ class LeadService
         $parsed_location['lead_id'] = $created_lead->id;
 
         LeadAddress::create($parsed_location);
-        LeadCompany::create(['lead_id' => $created_lead->id, 'name' => $request->company]);
+
+        $check_company = Company::where('name', $request->get('company'))->first();
+
+        if (!is_null($check_company)) {
+            LeadCompany::create(['lead_id' => $created_lead->id, 'company_id' => $check_company->id]);
+        } else {
+            $created_company = Company::create([
+                'name' => $request->get('company'),
+                'phone' => $request->get('phone'),
+                'email' => $request->get('email'),
+                'address' => $request->get('full_location')['formatted_address'],
+            ]);
+            LeadCompany::create(['lead_id' => $created_lead->id, 'company_id' => $created_company->id]);
+        }
+
         $lead = Lead::getLeads(1, $created_lead->id);
 
         $additional_contacts = $request->only('additional_location', 'additional_email', 'additional_phone');

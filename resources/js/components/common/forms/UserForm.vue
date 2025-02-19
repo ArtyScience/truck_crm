@@ -123,7 +123,7 @@ export default {
             </div>
             <div
                 class="col-span-4">
-                <div class="w-1/3 mr-2">
+                <div class="w-2/4 mr-2">
                     <TextInput
                         :add_label_classes="'block mb-2 text-sm font-medium ' +
                      'dark:text-white dark:bg-cyan-700 rounded'"
@@ -132,6 +132,11 @@ export default {
                         :error="errors.campaign_email"
                         :error_text="errors_text.campaign_email"
                         required/>
+                  <Button type="info" class="float-end">
+                    <template #icon_after>
+                      <PlusCircleIcon style="width: 15px" />
+                    </template>
+                  </Button>
                 </div>
             </div>
             <div class="col-span-4">

@@ -266,7 +266,7 @@ class LeadService
                 'name' => $request->get('company'),
                 'phone' => $request->get('phone'),
                 'email' => $request->get('email'),
-                'address' => $request->get('full_location')['formatted_address'],
+                'address' => $request->get('full_location')['formatted_address'] ?? '-',
             ]);
             LeadCompany::create(['lead_id' => $id, 'company_id' => $created_company->id]);
         }

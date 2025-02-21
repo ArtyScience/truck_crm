@@ -22,7 +22,6 @@ class DashboardController extends CoreController
     {
         $this->ringCentralService = $ringCentralService;
         $this->dashboardService = $dashboardService;
-        parent::__construct();
     }
 
     public function index(): View

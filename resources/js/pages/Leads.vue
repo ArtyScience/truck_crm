@@ -50,8 +50,8 @@ export default {
     data() {
         return {
             is_mobile: false,
-            headers: ['Company', 'Location', 'Industry', 'Web Page', 'Volume', 'Status'],
-            body_columns_skip: ['name', 'phone', 'email', 'notes', 'id', 'notes_full', 'created_at', 'created_at_formated', 'full_location'],
+            headers: ['Company', 'Email', 'Location', 'Industry', 'Web Page', 'Volume', 'Status'],
+            body_columns_skip: ['name', 'phone', 'notes', 'id', 'notes_full', 'created_at', 'created_at_formated', 'full_location'],
             modal_text: '',
             actions: {
                 modal: false,

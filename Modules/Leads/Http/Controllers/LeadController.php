@@ -148,77 +148,88 @@ class LeadController extends CoreController
                         }
                     }
 
-
                     $location_array = explode('/', $parsed_lead['location']);
                     $parsed_lead['city'] = $location_array[0] ?? '';
                     $parsed_lead['state'] = $location_array[1] ?? '';
 
-                    $response = Http::withHeaders([
-                        'User-Agent' => 'TransimexCRM/1.0 (artyweb.cris@gmail.com)' // Replace with your app details
-                    ])->get('https://nominatim.openstreetmap.org/search', [
-                        'city' => $parsed_lead['city'],
-                        'state' => $parsed_lead['state'],
-                        'format' => 'json'
-                    ]);
+                    if (!empty($parsed_lead['location'])) {
+                        $response = Http::withHeaders([
+                            'User-Agent' => 'TransimexCRM/1.0 (artyweb.cris@gmail.com)' // Replace with your app details
+                        ])->get('https://nominatim.openstreetmap.org/search', [
+                            'city' => $parsed_lead['city'],
+                            'state' => $parsed_lead['state'],
+                            'format' => 'json'
+                        ]);
 
-                    $responseData = json_decode($response->body(), true);
+                        $responseData = json_decode($response->body(), true);
 
-                    if (!empty($responseData)) {
-                        $displayName = $responseData[0]['display_name']; // Get first result
-                        $parts = explode(", ", $displayName); // Split by commas
+                        if (!empty($responseData)) {
+                            $displayName = isset($responseData[0])
+                                ? $responseData[0]['display_name'] : '';
 
-                        $city = $parts[0] ?? 'City not found';  // First part
-                        $state = $parts[count($parts) - 2] ?? 'State not found'; // Second last part
-                        $country = end($parts) ?? 'Country not found'; // Last part
+                            $parts = explode(", ", $displayName);
 
-                        $parsed_lead['city'] = $city;
-                        $parsed_lead['state'] = $state;
-                        $parsed_lead['country'] = $country;
-                    } else {
-                        echo "No results found.";
+                            $city = $parts[0] ?? 'City not found';
+                            $state = $parts[count($parts) - 2] ?? 'State not found';
+                            $country = end($parts) ?? 'Country not found';
+
+                            $parsed_lead['city'] = $city;
+                            $parsed_lead['state'] = $state;
+                            $parsed_lead['country'] = $country;
+                        } else {
+                            echo "No results found.";
+                        }
                     }
 
                     $lead = Lead::create([
                         'user_id' => Auth::id(),
-                        'name' => $parsed_lead['name'],
-                        'email' => $parsed_lead['email'],
-                        'phone' => $parsed_lead['phone'],
-                        'notes' => $parsed_lead['notes'],
-                        'web_page' => $parsed_lead['web_page'],
-                        'company_volume' => $parsed_lead['company_volume'],
+                        'name' => !empty($parsed_lead['name']) ? $parsed_lead['name'] : '-',
+                        'email' => !empty($parsed_lead['email']) ? $parsed_lead['email'] : '-',
+                        'phone' => !empty($parsed_lead['phone']) ? $parsed_lead['phone'] : '-',
+                        'notes' => !empty($parsed_lead['notes']) ? $parsed_lead['notes'] : '-',
+                        'web_page' => !empty($parsed_lead['web_page']) ? $parsed_lead['web_page'] : '-',
+                        'company_volume' => !empty($parsed_lead['company_volume'])
+                            ? $parsed_lead['company_volume'] : '0000',
                         'status_id' => LeadStatuses::first()->id]);
 
                     $lead_ids[] = $lead->id;
 
-                    LeadAddress::create([
-                        'lead_id' => $lead->id,
-                        'location_name' => $parsed_lead['city'] . ', ' . $parsed_lead['state'],
-                        'country' => $parsed_lead['country'],
-                        'city' => $parsed_lead['city'],
-                        'state' => $parsed_lead['state'],
-                        'zip' => '0000',
-                    ]);
+                    if (!empty($parsed_lead['location'])) {
+                        LeadAddress::create([
+                            'lead_id' => $lead->id,
+                            'location_name' => $parsed_lead['city'] . ', ' . $parsed_lead['state'],
+                            'country' => $parsed_lead['country'],
+                            'city' => $parsed_lead['city'],
+                            'state' => $parsed_lead['state'],
+                            'zip' => '0000',
+                        ]);
+                    }
 
-                    $industry = Comodity::where('name', $parsed_lead['industry'])->first();
-                    if (is_null($industry)) {
-                        $industry = Comodity::create([
-                            'name' => $parsed_lead['industry'],
+                    if (!empty($parsed_lead['industry'])) {
+                        $industry = Comodity::where('name', $parsed_lead['industry'])->first();
+                        if (is_null($industry)) {
+                            $industry = Comodity::create([
+                                'name' => $parsed_lead['industry'],
+                            ]);
+                        }
+                        LeadComodity::create([
+                            'lead_id' => $lead->id,
+                            'comodity_id' => $industry->id,
                         ]);
                     }
-                    LeadComodity::create([
-                        'lead_id' => $lead->id,
-                        'comodity_id' => $industry->id,
-                    ]);
-                    $company = Company::where('name', $parsed_lead['company'])->first();
-                    if (is_null($company)) {
-                        $company = Company::create([
-                            'name' => $parsed_lead['company'],
+
+                    if (!empty($parsed_lead['company'])) {
+                        $company = Company::where('name', $parsed_lead['company'])->first();
+                        if (is_null($company)) {
+                            $company = Company::create([
+                                'name' => $parsed_lead['company'],
+                            ]);
+                        }
+                        LeadCompany::create([
+                            'lead_id' => $lead->id,
+                            'company_id' => $company->id,
                         ]);
                     }
-                    LeadCompany::create([
-                        'lead_id' => $lead->id,
-                        'company_id' => $company->id,
-                    ]);
                 }
             } catch (Exception $e) {
                 throw $e;

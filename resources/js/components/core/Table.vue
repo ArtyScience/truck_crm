@@ -63,9 +63,12 @@ export default {
             this.$emit('edit:item', item)
         },
         showItem(id) {
-            const item = this.data.filter((item) => {
-                return item.id === id
-            })
+            let item = [];
+            for (let i = 0; i < this.data.length; i++) {
+              if (this.data[i].id === id) {
+                item = [this.data[i]];
+              }
+            }
             this.$emit('show:item', {item: item})
         },
         removeItem(id) {

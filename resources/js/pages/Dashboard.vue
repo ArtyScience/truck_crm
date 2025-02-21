@@ -138,7 +138,9 @@ export default {
         status_list: Object,
         deals_list: Object,
         leads_week_statistic: Object,
-        deals_week_statistic: Object
+        deals_week_statistic: Object,
+        call_logs: Object,
+        user_role: String
     },
 }
 </script>
@@ -167,12 +169,12 @@ export default {
                <div class="w-1/3 chart_wrapper mt-5">
                    <TaskList :tasks="tasks_list" />
                </div>
-               <div class="w-1/3 ">
+               <div v-if="user_role === 'ADMIN'" class="w-1/3 ">
                    <div class="text-center text-cyan-700">
                        <h1 class="font-medium font-bold"><span class="border-2 p-1 rounded border-cyan-600">Calls</span></h1>
                    </div>
                    <div class="p-2">
-                       <AudioCard />
+                       <AudioCard :audio="call_logs" />
                    </div>
                </div>
            </div>

@@ -11,6 +11,8 @@
             :activity_per_region="{{ json_encode($region_activity)}}"
             :leads_week_statistic="{{ json_encode($leads_week_statistic)}}"
             :deals_week_statistic="{{ json_encode($deals_week_statistic)}}"
+            :call_logs="{{ json_encode($call_logs) }}"
+            :user_role="{{ json_encode($role) }}"
         />
     </v-page-layout>
 @endsection

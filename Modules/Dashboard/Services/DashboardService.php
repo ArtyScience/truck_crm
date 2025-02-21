@@ -2,7 +2,9 @@
 
 namespace Modules\Dashboard\Services;
 
+use App\Models\RingCentral;
 use App\Models\Status;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Modules\Deal\Entities\Deal;
@@ -58,6 +60,8 @@ class DashboardService
         });
 
         $data['region_activity'] = Lead::getLeadsCountByState();
+        $data['call_logs'] = RingCentral::all();
+        $data['role'] = User::getUserRole();
 
         return view('dashboard::index', compact('data'));
     }

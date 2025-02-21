@@ -2,6 +2,7 @@
 
 namespace Modules\Dashboard\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Services\RingCentralService;

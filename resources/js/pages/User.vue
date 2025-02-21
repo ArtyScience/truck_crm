@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
-import {CogIcon, EyeIcon, PencilIcon, TrashIcon, ArrowNarrowDownIcon, PlusIcon} from '@heroicons/vue/solid'
+import {CogIcon, EyeIcon, PencilIcon,
+  TrashIcon, ArrowNarrowDownIcon, PlusIcon} from '@heroicons/vue/solid'
 import Paginator from "../components/core/Paginator.vue";
 import Table from "../components/core/Table.vue";
 import notifications from "../helpers/notifications.js";

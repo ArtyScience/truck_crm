@@ -31,12 +31,12 @@ export default {
         actions: Object
     },
     methods: {
+        addCampaignEmail() {
+          this.campaign_emails.push({email: ''})
+        },
         submitForm() {
+            this.form.campaign_emails = this.campaign_emails
             this.$emit('update:submit', this.form);
-            // this.actions.update_lead = true
-            // setTimeout(()=>{
-            //     this.actions.update_lead = false
-            // }, 3333)
         },
         selectRole(role_id) {
             this.form.role = role_id
@@ -54,7 +54,10 @@ export default {
         return {
             form: {},
             user_roles: [],
-            selected_role: ''
+            selected_role: '',
+            campaign_emails: [
+              { email: '' }
+            ]
         }
     },
 }
@@ -124,15 +127,19 @@ export default {
             <div
                 class="col-span-4">
                 <div class="w-2/4 mr-2">
-                    <TextInput
-                        :add_label_classes="'block mb-2 text-sm font-medium ' +
+                    <div
+                        v-for="item in campaign_emails"
+                        class="w-3/4 float-left mb-2">
+                      <TextInput
+                          :add_label_classes="'block mb-2 text-sm font-medium ' +
                      'dark:text-white dark:bg-cyan-700 rounded'"
-                        :label="'Campaign Email*'"
-                        v-model:content="form.campaign_email"
-                        :error="errors.campaign_email"
-                        :error_text="errors_text.campaign_email"
-                        required/>
-                  <Button type="info" class="float-end">
+                          :label="'Campaign Email'"
+                          v-model:content="item.email"
+                          required/>
+                    </div>
+                  <Button type="info"
+                          @clicked="addCampaignEmail"
+                          :aditional_classes="'float-right mt-3'" >
                     <template #icon_after>
                       <PlusCircleIcon style="width: 15px" />
                     </template>

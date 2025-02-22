@@ -63,12 +63,14 @@ export default {
             this.$emit('edit:item', item)
         },
         showItem(id) {
+          console.log('id', id);
             let item = [];
             for (let i = 0; i < this.data.length; i++) {
-              if (this.data[i].id === id) {
+              if (this.data[i].id == id) {
                 item = [this.data[i]];
               }
             }
+          console.log('item', item);
             this.$emit('show:item', {item: item})
         },
         removeItem(id) {

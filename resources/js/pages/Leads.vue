@@ -169,7 +169,7 @@ export default {
             }
         },
         updateImportedLeads(leads) {
-            this.leads = {...this.leads, ...leads.data}
+            this.leads = [...this.leads, ...leads.data]
             this.actions.modal = false
             notifications.success('Leads imported with success')
         },
@@ -229,6 +229,9 @@ export default {
                 .forEach(action => activity[action] = false);
         },
         showItem(data) {
+
+          console.log('data', data);
+          
             this.modal_text = 'Show Lead'
             this.table_item = data.item[0]
             this.actions.show_lead = true

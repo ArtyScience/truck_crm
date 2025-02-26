@@ -62,7 +62,7 @@
     </style>
 
     {{--Theme SCRIPTS--}}
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
 
     <style>
         .Toastify__toast {

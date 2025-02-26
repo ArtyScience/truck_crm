@@ -30,10 +30,11 @@ export default {
          overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50
           justify-center items-center w-full   max-h-full">
 
-        <div class="content_wrapper">
+        <div
+            style="width: 70%; margin-top: 1%;"
+            class="content_wrapper">
             <!-- Modal content -->
             <div
-                v-click-outside="closeModal"
                 @keydown.esc="closeModal"
                 class="relative bg-white rounded-lg
                     shadow-lg shadow-black dark:bg-gray-700 border border-gray-900">
@@ -74,9 +75,7 @@ export default {
     background-color: rgba(0, 0, 0, 0.5);
     height: 100%;
     .content_wrapper {
-        width: 40%;
         margin: 0 auto;
-        margin-top: 10%;
 
         .tile_dynamic {
             background-color: rgb(194 65 12 / var(--tw-bg-opacity, 1));

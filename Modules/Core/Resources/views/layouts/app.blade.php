@@ -43,6 +43,12 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
 
+    <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
+
+
+
+
+
     <style>
         /*INFO: THIS STYLES SHOULD BE HERE MANDATORY!!!*/
         #main{
@@ -63,7 +69,6 @@
 
     {{--Theme SCRIPTS--}}
     @vite(['resources/js/app.js', 'resources/css/app.css'])
-
     <style>
         .Toastify__toast {
             background-color: #333 !important;

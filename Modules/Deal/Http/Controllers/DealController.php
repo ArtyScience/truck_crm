@@ -33,6 +33,7 @@ class DealController extends CoreController
         $this->model = new Deal();
         $this->repository = new DealRepository();
         $this->repository->setModel($this->model);
+        parent::__construct();
     }
 
     /**
@@ -368,12 +369,17 @@ class DealController extends CoreController
 
     public function getLeadsByContact(string $contact): JsonResponse
     {
-        $leads = Lead::query()
+        $leads = Lead::select('leads.id', 'leads.name', 'leads.phone', 'leads.email')
             ->where(function ($query) use ($contact) {
-                $query->where('leads.name', 'like', '%' . $contact . '%')
-                    ->orWhere('email', 'like', '%' . $contact . '%')
+                $query->where('leads.phone', 'like', '%' . $contact . '%')
                     ->orWhere('phone', 'like', '%' . $contact . '%');
-            })->where('leads.user_id', Auth::user()->id)->get();
+            })->orWhere(function ($query) use ($contact) {
+                $query->where('leads.name', 'like', '%' . $contact . '%')
+                    ->orWhere('name', 'like', '%' . $contact . '%');
+            })->orWhere(function ($query) use ($contact) {
+                $query->where('leads.email', 'like', '%' . $contact . '%')
+                    ->orWhere('email', 'like', '%' . $contact . '%');
+            })->where('leads.user_id', Auth::user()->id)->distinct()->get();
 
         if (!is_null($leads)) {
             return response()->json(['success' => true, 'leads' => $leads]);

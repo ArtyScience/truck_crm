@@ -86,13 +86,19 @@ export default {
             }, 3333)
         },
         saveFormLead(lead) {
-            this.form.lead_id = lead.id
+          this.form.lead_id = lead.id
+          if (lead.name !== '-') {
             this.form.company_contact = lead.name
+          } else if (lead.phone !== '-') {
+            this.form.company_contact = lead.phone
+          } else if (lead.email !== '-') {
+            this.form.company_contact = lead.email
+          }
             this.lead_search = false
             this.lead_search_result = []
         },
         searchLead(search) {
-            if (search.length > 2) {
+            if (search.length >= 2) {
                 this.lead_search = true
                 const search_by_contact = this.form.company_contact
                 const url = 'api/v1/deal/get-leads-by-contact/' + search_by_contact
@@ -180,12 +186,12 @@ export default {
     },
     watch: {
         'mainForm'(newVal) {
-            if (Object.keys(this.old_form).length === 0) {
-                this.old_form = newVal
-            } else {
-                const response = utility.compareObjects(newVal, this.old_form)
-                this.$emit('unsaved:chages', response)
-            }
+            // if (Object.keys(this.old_form).length === 0) {
+            //     this.old_form = newVal
+            // } else {
+            //     const response = utility.compareObjects(newVal, this.old_form)
+            //     this.$emit('unsaved:chages', response)
+            // }
         },
         // 'form.company_contact'(searchValue, oldValue) {
         //     if (searchValue.length > 3 && oldValue !== searchValue) {

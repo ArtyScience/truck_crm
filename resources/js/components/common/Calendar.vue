@@ -37,6 +37,16 @@ const eventModal = createInteractiveEventModal({
   availablePeople: ['John Doe', 'Jane Doe', 'ARthur Q'],
   onAddEvent: (event) => {
     console.log('event', event);
+
+    const url = "api/v1/calendar";
+
+    axios.post(url, event)
+        .then(response => {
+          console.log("Success:", response.data);
+        })
+        .catch(error => {
+          console.error("Error:", error.response ? error.response.data : error.message);
+        });
   },
   onDeleteEvent: (eventId) => {
     console.log('eventId', eventId)
@@ -54,8 +64,6 @@ const eventModal = createInteractiveEventModal({
   people(event) {
     console.log('peopleSelect', event);
   },
-
-  has12HourTimeFormat: true,
   movable: true,
   hideTitle: false,
   fields: {
@@ -73,7 +81,7 @@ const eventModal = createInteractiveEventModal({
     people:[]
   },
   datePicker: {
-    min: '2025-01-01',
+    min: `${year}-${month}-${day}`,
     max: '2025-12-31',
   }
 })
@@ -90,7 +98,7 @@ const calendarApp = createCalendar({
   events: [
     {
       id: 1,
-      title: 'Call client Michael',
+      title: 'Call client Michael (4 days event)',
       start: '2025-02-24',
       end: '2025-02-28',
     },
@@ -105,7 +113,9 @@ const calendarApp = createCalendar({
     onDoubleClickDateTime(dateTime) {
       eventModal.clickToCreate(dateTime, {
         id: some_id++,
+
       })
+      console.log('here');
     },
     onEventUpdate(event) {
       console.log('event update', event);
@@ -123,8 +133,9 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div >
     <ScheduleXCalendar
+        style="height: 600px"
         :calendar-app="calendarApp"/>
   </div>
 </template>
@@ -135,4 +146,22 @@ export default {
   z-index: 100 !important;
   background-color: #fff !important;
 }
+.sx__date-grid-event-text {
+
+}
+
+.sx__event.sx__date-grid-event.sx__date-grid-cell {
+  background-color: #6750a4 !important;
+  color: white !important;
+  text-align: center;
+  padding: 5px !important;
+  height: 25px;
+  border-left: 4px solid red !important;
+}
+
+.sx__week-grid__date-number {
+  font-size: 13px !important;
+}
+
+
 </style>

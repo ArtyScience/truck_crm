@@ -129,8 +129,8 @@ export default {
             <SunIcon v-else/>
           </div>
         </button>
-        <button @click="openNotifications()" type="button"
-                class="hidden inline-flex text-gray-500 dark:text-white hover:text-blue-800"
+        <button id="notifyButton" @click="openNotifications()" type="button"
+                class="inline-flex text-gray-500 dark:text-white hover:text-blue-800"
                 aria-expanded="false">
           <div class="icon_wrapper">
             <BellIcon/>

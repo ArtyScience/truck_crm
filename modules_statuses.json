@@ -8,5 +8,6 @@
     "Leads": true,
     "Deal": true,
     "Task": true,
-    "Campain": true
+    "Campain": true,
+    "Calendar": true
 }

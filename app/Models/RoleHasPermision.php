@@ -12,6 +12,8 @@ class RoleHasPermision extends Model
     protected $table = 'role_has_permissions';
     protected $fillable = ['permission_id', 'role_id'];
     public $timestamps = false;
+    public $incrementing = false;
+    protected $primaryKey = null;
 
     public static function getPermissionRole(): Collection
     {

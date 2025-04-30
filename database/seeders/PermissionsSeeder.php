@@ -43,12 +43,15 @@ class PermissionsSeeder extends Seeder
         $permissions = Permission::all();
         foreach ($permissions as $permission) {
             if (!RoleHasPermision::where('permission_id', $permission->id)
-                    ->where( 'role_id', $role->id)->exists())
-                RoleHasPermision::create(
-                    ['permission_id' => $permission->id,
-                    'role_id' => $role->id]);
-    }
-    }
+                    ->where( 'role_id', $role->id)->exists()) {
+                RoleHasPermision::create([
+                    'permission_id' => $permission->id,
+                    'role_id' => $role->id
+                    ]
+                );
+            }
+        }
+   }
 
     public function getRole(string $role_check)
     {

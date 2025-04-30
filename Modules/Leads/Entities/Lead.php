@@ -125,10 +125,14 @@ class Lead extends Model
 
     public static function getLeadsCountByState(): Collection
     {
-        return Lead::select('state as x', DB::raw('COUNT(*) as y'))
+        return Lead::select('lead_address.state as x', DB::raw('COUNT(*) as y'))
             ->leftJoin('lead_address', 'lead_address.lead_id', '=', 'leads.id')
-            ->where('leads.user_id', Auth::id())->where('state', '!=', null)
-            ->where('state', '!=', '')->groupBy('state')->having('y', '>', 0)->get();
+            ->where('leads.user_id', Auth::id())
+            ->whereNotNull('lead_address.state')
+            ->where('lead_address.state', '!=', '')
+            ->groupBy('lead_address.state')
+            ->havingRaw('COUNT(*) > 0')
+            ->get();
     }
 
     public static function getLeadsStatistics()

@@ -20,12 +20,6 @@
     "dependencies": {
         "@heroicons/vue": "^1.0.6",
         "@ringcentral/sdk": "^5.0.3",
-        "@schedule-x/calendar": "^2.20.0",
-        "@schedule-x/event-modal": "^2.20.0",
-        "@schedule-x/events-service": "^2.20.0",
-        "@schedule-x/theme-default": "^2.20.0",
-        "@schedule-x/vue": "^2.18.0",
-        "@sx-premium/interactive-event-modal": "^3.3.1",
         "@tinymce/tinymce-vue": "^6.1.0",
         "@vitejs/plugin-vue": "^4.3.1",
         "@vuepic/vue-datepicker": "^10.0.0",

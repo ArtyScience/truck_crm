@@ -25,7 +25,9 @@ class LeadService
     public function index(Request $request, int $table_rows): JsonResponse|View
     {
         $data['comodities'] = response()->json(Comodity::all())->content();
+
         $leads = $this->collectionParser(Lead::getLeads($table_rows));
+
         $data['leads'] = response()->json($leads)->content();
 
         if ($request->get('page')) return response()->json($leads);

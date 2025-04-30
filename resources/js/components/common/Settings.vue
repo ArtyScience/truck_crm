@@ -3,7 +3,6 @@
 import {AdjustmentsIcon, BellIcon, MoonIcon, SunIcon, CalendarIcon} from '@heroicons/vue/solid'
 import axios from 'axios';
 import Modal from "../core/Modal.vue";
-import CallendarWrapper from "./CallendarWrapper.vue";
 
 export default {
   mounted() {
@@ -27,7 +26,6 @@ export default {
     }
   },
   components: {
-    CallendarWrapper,
     Modal,
     AdjustmentsIcon, BellIcon, MoonIcon, SunIcon, CalendarIcon
   },
@@ -114,7 +112,6 @@ export default {
         :state="actions.show_modal">
       <template #body>
         <div v-if="actions.show_modal" class="calendar_wrapper">
-          <CallendarWrapper :state="actions.show_modal" />
         </div>
       </template>
     </Modal>

@@ -36,54 +36,56 @@ export default {
     <table
         style="border: 1px solid transparent; max-width: 820px; border-radius: 10px; color: #fff; line-height: .4; font-family: InterVariable, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';"
         bgcolor="#87387b" cellspacing="0" cellpadding="0" border="0" width="100%">
-      <tr height="10"></tr>
-      <tr v-for="item in audio">
-        <td width="15"></td>
-        <td width="15"></td>
-        <td>
-          <h3 class="mb-2 mt-4">{{ item.from }} -> {{ item.to }} ({{ item.status }}) </h3>
-          <p class="mb-2 mt-4">TIME: {{ parseDateTime(item.started_at) }}</p>
-          <audio controls style="width: 100%; opacity: .7;">
-            <a
-                :src="'/calls_records/' + item.file_path"
-                style="font-family: monospace; text-decoration: none; color: #fff;">
-              <table cellspacing="0" cellpadding="0">
-                <tbody>
-                <tr>
-                  <td>
-                    <!--                                    <img width="47" height="47" src="https://marketing.transistor.fm/assets/email-embed-player/play.png" />-->
-                  </td>
-                  <td width="10px"></td>
-                  <td>
-                    <div>
-                      <!--                                        <img width="100%" src="https://marketing.transistor.fm/assets/email-embed-player/progress-bar.png" />-->
-                    </div>
-                    <table width="100%" cellspacing="0" cellpadding="0">
-                      <tbody>
-                      <tr height="7.5"></tr>
-                      <tr>
-                        <td width="100">
-                          <!--                                                <img height="19" width="100" src="https://marketing.transistor.fm/assets/email-embed-player/controls.png" />-->
-                        </td>
-                        <!--                                            <td align="right">-->
-                        <!--                                                <small style="color: #ffffff; opacity:0.7;)">00:00</small>-->
-                        <!--                                                <small style="color: #ffffff; opacity:0.2;)">|</small>-->
-                        <!--                                                <small style="color: #ffffff; opacity:0.7;)">01:12:00</small>-->
-                        <!--                                            </td>-->
-                      </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </a>
-            <source :src="'/calls_records/' + item.file_path" type="audio/mpeg"></source>
-          </audio>
-        </td>
-        <td width="15"></td>
-      </tr>
-      <tr height="7.5"></tr>
+     <tbody>
+     <tr height="10"></tr>
+     <tr v-for="item in audio">
+       <td width="15"></td>
+       <td width="15"></td>
+       <td>
+         <h3 class="mb-2 mt-4">{{ item.from }} -> {{ item.to }} ({{ item.status }}) </h3>
+         <p class="mb-2 mt-4">TIME: {{ parseDateTime(item.started_at) }}</p>
+         <audio controls style="width: 100%; opacity: .7;">
+           <a
+               :src="'/calls_records/' + item.file_path"
+               style="font-family: monospace; text-decoration: none; color: #fff;">
+             <table cellspacing="0" cellpadding="0">
+               <tbody>
+               <tr>
+                 <td>
+                   <!--                                    <img width="47" height="47" src="https://marketing.transistor.fm/assets/email-embed-player/play.png" />-->
+                 </td>
+                 <td width="10px"></td>
+                 <td>
+                   <div>
+                     <!--                                        <img width="100%" src="https://marketing.transistor.fm/assets/email-embed-player/progress-bar.png" />-->
+                   </div>
+                   <table width="100%" cellspacing="0" cellpadding="0">
+                     <tbody>
+                     <tr height="7.5"></tr>
+                     <tr>
+                       <td width="100">
+                         <!--                                                <img height="19" width="100" src="https://marketing.transistor.fm/assets/email-embed-player/controls.png" />-->
+                       </td>
+                       <!--                                            <td align="right">-->
+                       <!--                                                <small style="color: #ffffff; opacity:0.7;)">00:00</small>-->
+                       <!--                                                <small style="color: #ffffff; opacity:0.2;)">|</small>-->
+                       <!--                                                <small style="color: #ffffff; opacity:0.7;)">01:12:00</small>-->
+                       <!--                                            </td>-->
+                     </tr>
+                     </tbody>
+                   </table>
+                 </td>
+               </tr>
+               </tbody>
+             </table>
+           </a>
+           <source :src="'/calls_records/' + item.file_path" type="audio/mpeg"></source>
+         </audio>
+       </td>
+       <td width="15"></td>
+     </tr>
+     <tr height="7.5"></tr>
+     </tbody>
     </table>
   </div>
 </template>

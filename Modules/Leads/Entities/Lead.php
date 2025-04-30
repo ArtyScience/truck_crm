@@ -28,7 +28,8 @@ class Lead extends Model
     {
         $lead_query = self::leadQuery();
 
-        if (!is_null($lead_id)) $lead_query = $lead_query->where('leads.id', $lead_id);
+        if (!is_null($lead_id))
+            $lead_query = $lead_query->where('leads.id', $lead_id);
 
         return $lead_query->paginate($rows);
     }
@@ -46,18 +47,26 @@ class Lead extends Model
 
     private static function leadQuery()
     {
-
         $addresses_subquery = self::addressSubQuery();
         $comodities_subquery = self::comoditySubQuery();
         $lead_companies_subquery = self::companySubQuery();
 
         $role = User::getUserRole();
 
-        $lead_query = Lead::select('leads.id', 'company',
+        $lead_query = Lead::select(
+            'leads.id',
+            'lead_companies.company',
             'leads.name',
-            'leads.email', 'leads.phone', 'leads.notes',
-            'locations_list', 'comodities_list', 'leads.created_at',
-            'leads.web_page', 'leads.company_volume', 'leads.status_id',)
+            'leads.email',
+            'leads.phone',
+            'leads.notes',
+            'locations_list',
+            'comodities_list',
+            'leads.created_at',
+            'leads.web_page',
+            'leads.company_volume',
+            'leads.status_id'
+        )
             ->leftJoinSub($addresses_subquery, 'addresses', function ($join) {
                 $join->on('addresses.lead_id', '=', 'leads.id');
             })
@@ -67,9 +76,23 @@ class Lead extends Model
             ->leftJoinSub($lead_companies_subquery, 'lead_companies', function ($join) {
                 $join->on('lead_companies.lead_id', '=', 'leads.id');
             })
-            ->groupBy('leads.id')->orderBy('leads.id', 'DESC');
+            ->groupBy(
+                'leads.id',
+                'lead_companies.company',
+                'leads.name',
+                'leads.email',
+                'leads.phone',
+                'leads.notes',
+                'locations_list',
+                'comodities_list',
+                'leads.created_at',
+                'leads.web_page',
+                'leads.company_volume',
+                'leads.status_id'
+            )
+            ->orderBy('leads.id', 'DESC');
 
-        if ($role !== 'ADMIN') {
+        if ($role !== "ADMIN") {
             $lead_query = $lead_query->where('user_id', Auth::user()->id);
         }
 
@@ -81,14 +104,12 @@ class Lead extends Model
         return DB::table('lead_address as addresses')
             ->select(
                 'addresses.lead_id',
-                DB::raw('
-                GROUP_CONCAT(
-                         CONCAT_WS(
-                            " - ", addresses.city, addresses.state
-                        ), "||") AS locations_list'
-                ),
-            )
-            ->groupBy('addresses.lead_id')->distinct();
+                DB::raw("
+            STRING_AGG(
+                CONCAT_WS(' - ', addresses.city, addresses.state),
+                '||'
+            ) AS locations_list
+        "))->groupBy('addresses.lead_id');
     }
 
     private static function comoditySubQuery(): Builder
@@ -96,21 +117,23 @@ class Lead extends Model
         return DB::table('lead_comodities as lead_comodities_list')
             ->select(
                 'lead_comodities_list.lead_id',
-                DB::raw('GROUP_CONCAT(comodities.name SEPARATOR "||")
-                                     AS comodities_list')
+                DB::raw("
+            STRING_AGG(comodities.name, '||') AS comodities_list
+        ")
             )
-            ->leftJoin('comodities', 'comodities.id',
-                '=', 'lead_comodities_list.comodity_id')
-            ->groupBy('lead_comodities_list.lead_id')->distinct();
+            ->leftJoin('comodities', 'comodities.id', '=', 'lead_comodities_list.comodity_id')
+            ->groupBy('lead_comodities_list.lead_id');
     }
 
     private static function companySubQuery(): Builder
     {
-        return  DB::table('lead_companies')
-            ->select('lead_companies.lead_id',
-                DB::raw('GROUP_CONCAT(companies.name SEPARATOR "||") AS company'))
+        return DB::table('lead_companies')
+            ->select(
+                'lead_companies.lead_id',
+                DB::raw("STRING_AGG(companies.name, '||') AS company")
+            )
             ->leftJoin('companies', 'companies.id', '=', 'lead_companies.company_id')
-            ->groupBy('lead_companies.lead_id')->distinct();
+            ->groupBy('lead_companies.lead_id');
     }
 
     /*TODO: Implement in subquery*/

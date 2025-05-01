@@ -7,7 +7,7 @@ use Modules\Leads\Entities\Lead;
 
 class LeadSeeder extends Seeder
 {
-    private int $leads_create = 10;
+    private int $leads_create = 100000;
 
     public function run(): void
     {

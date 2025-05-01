@@ -35,8 +35,6 @@ class RingCentralService
                 ]);
             }
 
-            dd($platform);
-
             $platform->loggedIn();
 
             $platform->authorize(
@@ -44,12 +42,7 @@ class RingCentralService
                 env('RINGCENTRAL_EXTENSION'),
                 env('RINGCENTRAL_PASSWORD'));
 
-
-
         } catch (\Exception $e) {
-            //dd($platform);
-
-            dd($e->getCode(), $e->getMessage());
             Log::error('RingCentral Authentication Error: ' . $e->getMessage());
             return false;
         }

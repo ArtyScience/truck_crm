@@ -33,31 +33,8 @@ class DashboardService
             $data['deal_list'][] = $item->deals;
         }
 
-        $data['tasks_list'] = TaskModel::getUserTasks(Auth::id());
-
-        $data['tasks_list']->transform(function ($item) {
-
-            $createdAt = $item->created_at;
-            $deadline = Carbon::parse($item->deadline);
-
-            $currentDate = Carbon::now();
-            $totalDuration = $deadline->diffInSeconds($createdAt);
-            $time_elapsed = $currentDate->diffInSeconds($createdAt);
-
-            $time_remain = $totalDuration - $time_elapsed;
-            $one_percent = $totalDuration / 100;
-
-            $timeline_percent = ($totalDuration / $one_percent) - ($time_remain / $one_percent);
-            $timeline = [
-                'deadline' => Carbon::parse($deadline->toDateString())->format('d-m-Y'),
-                'percent_elapsed' => round($timeline_percent, 2),
-            ];
-
-            $item->timeline = ($timeline['percent_elapsed'] <= 100)
-                ? $timeline['percent_elapsed'] . "%" : 100 . '%';
-            $item->deadline = $timeline['deadline'];
-            return $item;
-        });
+        $tasks = TaskModel::getUserTasks(Auth::id());
+        $data['tasks_list'] = TaskModel::parseResponse($tasks);
 
         $data['region_activity'] = Lead::getLeadsCountByState();
         $data['call_logs'] = RingCentral::all();

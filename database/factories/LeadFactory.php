@@ -32,6 +32,7 @@ class LeadFactory extends Factory
             'email' => fake()->safeEmail(),
             'phone' => fake()->phoneNumber(),
             'notes' => fake()->text(),
+            'status_id' => 1
         ];
     }
 

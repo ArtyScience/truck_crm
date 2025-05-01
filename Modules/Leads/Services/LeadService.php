@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Modules\Leads\Entities\Comodity;
 use Modules\Leads\Entities\Lead;
@@ -193,6 +194,8 @@ class LeadService
                                      'web_page', 'company_volume');
 
         $data['user_id'] = Auth::id();
+        $data['status_id'] = DB::table('statuses')
+            ->first()->id;
 
         $created_lead = Lead::create($data);
         $comodities = $request->get('comodities_list');
@@ -299,9 +302,13 @@ class LeadService
             $lead->notes_full = $lead->notes;
             $lead->notes = substr($lead->notes, 0, 50) . '...';
             $lead->created_at_formated = $lead->created_at->format('F d, H:i');
-            $lead->status_id =
-                LeadStatuses::where('id', $lead->status_id)->first()->name ??
-                LeadStatuses::first()->name;
+
+            if ( LeadStatuses::first() ) {
+                $lead->status_id =
+                    LeadStatuses::where('id', $lead->status_id)->first()->name ??
+                    LeadStatuses::first()->name;
+            }
+
             return $lead;
         });
 

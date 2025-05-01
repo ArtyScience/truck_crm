@@ -2,6 +2,7 @@
 
 namespace Modules\Task\Entities;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -55,5 +56,39 @@ class TaskModel extends Model
                             'tasks.priority', 'tasks.created_at', 'tasks.status')
             ->where('user_id', $user_id)->where('tasks.status', TaskModel::ACTIVE)
             ->get();
+    }
+
+    /**
+     * @param $tasks
+     * @return mixed
+     */
+    public static function parseResponse($tasks)
+    {
+        $tasks->transform(function ($item) {
+
+            $createdAt = $item->created_at;
+            $deadline = Carbon::parse($item->deadline);
+
+            $currentDate = Carbon::now();
+            $totalDuration = $deadline->diffInSeconds($createdAt);
+            $time_elapsed = $currentDate->diffInSeconds($createdAt);
+
+            $time_remain = $totalDuration - $time_elapsed;
+            $one_percent = $totalDuration / 100;
+
+            $timeline_percent = ($totalDuration / $one_percent)
+                - ($time_remain / $one_percent);
+            $timeline = [
+                'deadline' => Carbon::parse($deadline->toDateString())->format('d-m-Y'),
+                'percent_elapsed' => round($timeline_percent, 2),
+            ];
+
+            $item->timeline = ($timeline['percent_elapsed'] <= 100)
+                ? $timeline['percent_elapsed'] . "%" : 100 . '%';
+            $item->deadline = $timeline['deadline'];
+            return $item;
+        });
+
+        return $tasks;
     }
 }

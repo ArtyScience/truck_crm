@@ -31,7 +31,7 @@ export default {
           justify-center items-center w-full   max-h-full">
 
         <div
-            style="width: 70%; margin-top: 1%;"
+            style="width: 40%; margin-top: 1%;"
             class="content_wrapper">
             <!-- Modal content -->
             <div

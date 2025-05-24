@@ -38,6 +38,7 @@ class LeadFactory extends Factory
 
     private function getUserId(): int
     {
+        dump(User::inRandomOrder()->first()->id);
         return User::inRandomOrder()->first()->id;
     }
 }

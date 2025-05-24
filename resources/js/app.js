@@ -100,26 +100,26 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
 	console.warn("Push notifications are not supported in this browser.");
 }
 
+/*TODO: Only if user is auth run code below */
 
-
-document.getElementById("notifyButton").addEventListener("click", function () {
-	if (Notification.permission === "granted") {
-		new Notification("Hello! Notifications are enabled.");
-		const beamsClient = new PusherPushNotifications.Client({
-			instanceId: 'ef60a524-6a00-473a-829f-09beb7500203',
-		});
-
-		beamsClient.start()
-			.then(() => beamsClient.addDeviceInterest('calendar_notification'))
-			.then(() => console.log('Successfully registered and subscribed!'))
-			.catch(console.error);
-
-	} else if (Notification.permission !== "denied") {
-		Notification.requestPermission().then(permission => {
-			if (permission === "granted") {
-				new Notification("Thank you for enabling notifications!");
-			}
-		});
-	}
-});
+// document.getElementById("notifyButton").addEventListener("click", function () {
+// 	if (Notification.permission === "granted") {
+// 		new Notification("Hello! Notifications are enabled.");
+// 		const beamsClient = new PusherPushNotifications.Client({
+// 			instanceId: 'ef60a524-6a00-473a-829f-09beb7500203',
+// 		});
+//
+// 		beamsClient.start()
+// 			.then(() => beamsClient.addDeviceInterest('calendar_notification'))
+// 			.then(() => console.log('Successfully registered and subscribed!'))
+// 			.catch(console.error);
+//
+// 	} else if (Notification.permission !== "denied") {
+// 		Notification.requestPermission().then(permission => {
+// 			if (permission === "granted") {
+// 				new Notification("Thank you for enabling notifications!");
+// 			}
+// 		});
+// 	}
+// });
 

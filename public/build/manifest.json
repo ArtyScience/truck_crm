@@ -13,23 +13,23 @@
     "src": "node_modules/tw-elements/dist/js/chartjs-plugin-datalabels.es.js"
   },
   "resources/css/app.css": {
-    "file": "assets/app-e23194b7.css",
+    "file": "assets/app-8f34aa7a.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/app.css": {
-    "file": "assets/app-3284dbb1.css",
+    "file": "assets/app-4b2fad84.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
     "css": [
-      "assets/app-3284dbb1.css"
+      "assets/app-4b2fad84.css"
     ],
     "dynamicImports": [
       "node_modules/tw-elements/dist/js/chart.es.js",
       "node_modules/tw-elements/dist/js/chartjs-plugin-datalabels.es.js"
     ],
-    "file": "assets/app-89d4172c.js",
+    "file": "assets/app-f5fa06c1.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }

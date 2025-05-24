@@ -24,7 +24,9 @@ class Status extends Model
             'deals_details_data', 'statuses.name as status_name', 'statuses.id')
             ->leftJoinSub($deal_subquery, 'deals', function ($join) {
                 $join->on('deals.status_id', '=', 'statuses.id');
-            })->distinct()->get();
+            })
+            ->orderBy('statuses.id', 'ASC')
+            ->distinct()->get();
     }
 
     public static function getLeadsStatuses()
@@ -103,6 +105,7 @@ class Status extends Model
             ->leftJoin('deals_details', 'deals_details.deal_id', '=', 'deals.id')
             ->leftJoin('deal_locations', 'deal_locations.deal_id', '=', 'deals.id')
             ->leftJoin('leads', 'leads.id', '=', 'deals.lead_id')
+            ->orderBy('deals.status_id', 'ASC')
             ->groupBy('deals.status_id');
 
 

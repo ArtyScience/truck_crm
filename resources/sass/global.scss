@@ -1,9 +1,3 @@
-*,
-*::before,
-*::after {
-  box-sizing: revert !important;
-}
-
 .content_wrapper {
     min-height: 500px;
 }

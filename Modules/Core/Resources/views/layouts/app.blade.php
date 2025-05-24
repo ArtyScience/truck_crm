@@ -104,7 +104,7 @@
         <div class="text-gray-900 dark:text-gray-100">
             <div class="max-w-9xl mx-auto pt-0 pb-2 px-4 sm:px-6 lg:px-8 relative">
                 <div class="float-left">
-                    <p class="ml-20 mt-3 text-xs">TransimeX - CRM <span class="text-red-200">Beta - 0.001</span></p>
+                    <p class="ml-20 mt-3 text-xs">Fast Truck - CRM <span class="text-red-200">Beta - 0.001</span></p>
                 </div>
                 <div class="float-right" >
                     <v-gotop></v-gotop>

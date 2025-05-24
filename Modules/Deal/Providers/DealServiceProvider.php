@@ -4,6 +4,7 @@ namespace Modules\Deal\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Modules\Deal\Services\DealService;
 
 class DealServiceProvider extends ServiceProvider
 {
@@ -30,6 +31,10 @@ class DealServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->register(RouteServiceProvider::class);
+
+        $this->app->singleton(DealService::class, function ($app) {
+            return new DealService();
+        });
     }
 
     /**

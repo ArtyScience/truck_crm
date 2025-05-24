@@ -56,7 +56,7 @@ class Deal extends Model
         $role = User::getUserRole();
 
         $statistics = Deal::selectRaw('
-                    DATE(created_at) as day,
+                    EXTRACT(DOW FROM created_at) AS day,
                     COUNT(*) as total_rows')
             ->groupBy('day')->orderBy('day', 'ASC');
 

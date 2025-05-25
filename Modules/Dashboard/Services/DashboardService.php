@@ -45,15 +45,11 @@ class DashboardService
 
     private function parseWeekStatistics($statistics)
     {
-        $week_cicles = 7;
-        $week_statistics = array();
-        for ($day = 1; $day <= $week_cicles; $day++) {
-            if ($statistics->first()->day == $day) {
-                $week_statistics[] = $statistics->first()->total_rows;
-            } else {
-                $week_statistics[] = 0;
-            }
+        $week_statistics = array_fill(0, 6 + 1, 0);
+        foreach ($statistics as $statistic) {
+            $week_statistics[$statistic->day] = $statistic->total_rows;
         }
+        ksort($week_statistics);
 
         return $week_statistics;
     }

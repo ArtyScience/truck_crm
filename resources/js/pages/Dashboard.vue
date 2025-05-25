@@ -153,8 +153,8 @@ export default {
        <div class="charts ">
           <div class="flex">
               <div class="w-1/3 chart_wrapper">
-                  <h1 class="text-center text-cyan-700 mt-2 mb-2">
-                      <span class="border-2 p-1 rounded border-cyan-600">Deals</span>
+                  <h1 class="text-center text-cyan-700  mb-2">
+                      <span class="p-1 rounded border-cyan-600">Deals by status</span>
                   </h1>
                   <div id="chart2" class=""></div>
               </div>

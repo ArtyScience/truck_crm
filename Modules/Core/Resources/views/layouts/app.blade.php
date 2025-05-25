@@ -55,6 +55,7 @@
             opacity: 0;
             transition: opacity 0.5s ease;
             background-image: url('logo_bg.png');
+			background-color: #1F2937;
             background-position: center 200px;
             background-repeat: no-repeat;
         }
@@ -102,7 +103,7 @@
         </div>
     </div>
 
-    <footer id="footer" class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm fixed">
+    <footer id="footer" class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm ">
         <div class="text-gray-900 dark:text-gray-100">
             <div class="max-w-9xl mx-auto pt-0 pb-2 px-4 sm:px-6 lg:px-8 relative">
                 <div class="float-left">

@@ -1,5 +1,5 @@
 <script>
-import Chart from "../components/charts/core/Chart.vue";
+// import Chart from "../components/charts/core/Chart.vue";
 import StatisticManager from "../components/charts/StatisticManager.vue";
 import Button from "../components/core/Button.vue";
 import TextInput from "../components/core/form/TextInput.vue";
@@ -12,7 +12,6 @@ export default {
     components: {
         AudioCard,
         TaskList,
-        Chart,
         StatisticManager,
         Button,
         TextInput

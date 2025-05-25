@@ -107,8 +107,9 @@ export default {
 </script>
 
 <template>
-    <div class="table_wrapper relative mt-5">
-        <table v-if="result" class="table  table-auto text-xs">
+    <div class="table_wrapper relative mt-5"  :class="{'bg-red-300': !result}">
+        <table v-show="result"
+               class="table  table-auto text-xs">
             <thead v-if="headers" class="">
                 <tr class="font-bold text-cyan-900 dark:text-blue-100 ">
                     <th v-for="title in headers" class="relative rounded">
@@ -129,7 +130,7 @@ export default {
             </thead>
             <tbody>
                 <tr v-for="item in data"
-                    class="hover:bg-blue-100 dark:hover:bg-blue-700 cursor-pointer">
+                    class="hover:bg-blue-100 dark:hover:bg-sky-900 cursor-pointer">
                     <td v-for="(value, key) in item"
                         @click="showItem(item.id)"
                         v-show="!skipColumn(key)">

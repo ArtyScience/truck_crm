@@ -9,14 +9,14 @@ import { createApp } from "vue";
 
 const app = createApp({});
 
-const apiKey = 'AIzaSyAb726TP38q1UpX8-O-hRdeeNobXO4pAcc'
-const script = document.createElement("script");
-script.setAttribute(
-    "src",
-    `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&v=weekly&callback=initMap`
-), window.initMap = () => {
-}, script.onerror = async (c) => {
-}, document.head.appendChild(script);
+// const apiKey = 'AIzaSyAb726TP38q1UpX8-O-hRdeeNobXO4pAcc'
+// const script = document.createElement("script");
+// script.setAttribute(
+//     "src",
+//     `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&v=weekly&callback=initMap`
+// ), window.initMap = () => {
+// }, script.onerror = async (c) => {
+// }, document.head.appendChild(script);
 
 /*COMPONENTS*/
 import Settings from "./components/common/Settings.vue";

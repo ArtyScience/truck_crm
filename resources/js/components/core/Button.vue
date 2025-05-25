@@ -1,4 +1,3 @@
-<!--TODO: REFACTOR STYLES PUT IT IN PCSS-->
 <script>
 const css_settings = {
     sizes: {
@@ -7,18 +6,12 @@ const css_settings = {
         lg: 'px-5 py-2.5'
     },
     types: {
-        success: 'from-green-500 via-green-600 to-green-700 ' +
-            'focus:ring-green-300 dark:focus:ring-green-800 ' +
-            'shadow-lg shadow-green-500/50 dark:shadow-green-800/80',
-
-        info: 'from-cyan-500 via-cyan-600 to-cyan-700 focus:ring-cyan-300 ' +
-            'dark:focus:ring-cyan-800 focus:ring-blue-300 dark:focus:ring-blue-800 dark:shadow-cyan-800/80',
-
-        primary: 'from-sky-700 via-sky-900 to-sky-950 focus:ring-blue-300' +
-            ' dark:focus:ring-blue-800 shadow-blue-500/50 dark:shadow-blue-800/80',
-        warning: 'from-lime-500 via-lime-600 to-lime-700 focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lime-800/80',
-        danger: 'from-gray-500 via-gray-600 to-gray-700 focus:ring-red-300 dark:focus:ring-red-800 dark:shadow-red-800/80',
-        close: 'text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:text-white'
+        success: 'cbtn-success',
+        info: 'cbtn-info',
+        primary: 'cbtn-primary',
+        warning: 'cbtn-warning',
+        danger: 'cbtn-danger',
+        close: 'cbtn-close',
     }
 }
 import {RefreshIcon} from "@heroicons/vue/solid";
@@ -96,8 +89,33 @@ export default {
 
 <style lang="scss" scoped>
 .btn_wrapper {
+  .cbtn-danger {
+    @apply from-gray-500 via-gray-600 to-gray-700  dark:shadow-gray-500;
+  }
+  .cbtn-primary {
+    @apply from-sky-700 via-sky-900 to-sky-950 focus:ring-blue-300 dark:focus:ring-sky-800  dark:shadow-sky-800/80 ;
+  }
+  .cbtn-success {
+    @apply from-green-700 via-green-800 to-green-900
+            focus:ring-green-300 dark:focus:ring-green-800
+            shadow-lg  dark:shadow-green-800/80;
+  }
 
-    button {
+  .cbtn-info {
+    @apply from-cyan-500 via-cyan-600 to-cyan-700 focus:ring-cyan-300
+            dark:focus:ring-cyan-800 focus:ring-blue-300 dark:focus:ring-blue-800 dark:shadow-cyan-800/80;
+  }
+
+  .cbtn-warning {
+    @apply from-lime-500 via-lime-600 to-lime-700 focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lime-800/80;
+  }
+
+  .cbtn-close {
+      @apply text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex
+                justify-center items-center dark:hover:text-white;
+  }
+
+  button {
         text-shadow: 2px 2px 2px darkslategray;
         text-transform: uppercase;
         letter-spacing: 1px;
@@ -117,10 +135,8 @@ export default {
             width: 10px;
         }
     }
-
-
 }
-
+/*TODO: FIX TOOLTIP ON BUITTONS CORE*/
 /* Tooltip container */
 .tooltip {
     position: absolute;
@@ -130,7 +146,6 @@ export default {
     top: 0;
     left: 0;
 }
-
 /* Tooltip text */
 .tooltip .tooltip-text {
     background-color: #333; /* Background color */
@@ -144,7 +159,6 @@ export default {
     opacity: 0; /* Hide initially */
     transition: opacity 0.3s; /* Smooth fade-in */
 }
-
 /* Tooltip arrow */
 .tooltip .tooltip-text::after {
     content: "";
@@ -156,5 +170,4 @@ export default {
     border-style: solid;
     border-color: #333 transparent transparent transparent; /* Arrow color matches tooltip background */
 }
-
 </style>

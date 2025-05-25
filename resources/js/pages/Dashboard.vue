@@ -27,7 +27,8 @@ export default {
         var options = {
             chart: {
                 type: "bar",
-                height: 400
+                height: 400,
+                foreColor: '#cecdcd'
             },
             series: [
                 {
@@ -51,7 +52,8 @@ export default {
         var options = {
             chart: {
                 type: "bar",
-                height: 400
+                height: 400,
+                foreColor: '#cecdcd'
             },
             series: [
                 {
@@ -83,6 +85,8 @@ export default {
                 '#65A30D', '#06B6D4', '#0891B2', '#f6b632'],
             chart: {
                 type: 'donut',
+              foreColor: '#cecdcd'
+
             },
             legend: {
                 show: true,
@@ -128,7 +132,7 @@ export default {
             colors: ['#1a5d44']
         };
 
-        var chart = new ApexCharts(document.querySelector("#chart3"), options3);
+        var chart = new ApexCharts(document.querySelector("#deals_chart"), options3);
         chart.render();
     },
     props: {
@@ -165,7 +169,7 @@ export default {
               </div>
           </div>
            <div class="flex w-full">
-               <div id="chart3" class="w-1/3 mt-5"></div>
+               <div id="deals_chart" class="w-1/3 mt-5"></div>
                <div class="w-1/3 chart_wrapper mt-5">
                    <TaskList :tasks="tasks_list" />
                </div>
@@ -190,6 +194,9 @@ export default {
             text-transform: uppercase;
             font-weight: bold;
         }
+      #leads_week_statistics {
+        //color: white !important;
+      }
     }
 }
 </style>

@@ -18,39 +18,33 @@
                         title="Statistics"
                         :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         <x-heroicon-o-chart-bar width="25"/>
-                        {{ 'Dashboard' }}
                     </x-nav-link>
                     <x-nav-link
                         title="Deals"
                         :href="route('deal')" :active="request()->routeIs('deal')">
                         <x-heroicon-o-currency-dollar width="25"/>
-                        {{ 'Deals' }}
                     </x-nav-link>
                     <x-nav-link
                         title="Leads"
                         :href="route('leads')" :active="request()->routeIs('leads')">
                         <x-heroicon-o-user-group width="25"/>
-                        {{ 'Leads' }}
                     </x-nav-link>
                     <x-nav-link
                         title="Campaigns"
                         :href="route('campaigns')"
                         :active="request()->routeIs('campaigns')">
                         <x-heroicon-o-megaphone width="25"/>
-                        {{ 'Marketing' }}
                     </x-nav-link>
                     <x-nav-link
                         title="Tasks"
                         :href="route('task')" :active="request()->routeIs('task')">
                         <x-heroicon-o-numbered-list width="25"/>
-                        {{ 'Tasks' }}
                     </x-nav-link>
                     @if($user->hasRole('ADMIN'))
                         <x-nav-link
                             title="Users"
                             :href="route('user')" :active="request()->routeIs('user')">
                             <x-heroicon-o-user-circle width="25"/>
-                            {{ 'Users' }}
                         </x-nav-link>
                     @endif
                     @if($user->hasRole('ADMIN'))

@@ -1,15 +1,18 @@
 <script>
-// import Chart from "../components/charts/core/Chart.vue";
 import StatisticManager from "../components/charts/StatisticManager.vue";
 import Button from "../components/core/Button.vue";
 import TextInput from "../components/core/form/TextInput.vue";
 import ApexCharts from 'apexcharts'
 import TaskList from "../components/common/TaskList.vue";
 import AudioCard from "../components/common/cards/AudioCard.vue";
+import Title from "../components/core/Title.vue";
+import DealsStatusChart from "../components/charts/DealsStatusChart.vue";
 
 export default {
     name: "Dashboard",
     components: {
+      DealsStatusChart,
+        Title,
         AudioCard,
         TaskList,
         StatisticManager,
@@ -153,31 +156,35 @@ export default {
        <div class="charts ">
           <div class="flex">
               <div class="w-1/3 chart_wrapper">
-                  <h1 class="text-center text-cyan-700  mb-2">
-                      <span class="p-1 rounded border-cyan-600">Deals by status</span>
-                  </h1>
-                  <div id="chart2" class=""></div>
+                 <Title title="Deals by status" />
+                <div id="chart2" class=""></div>
               </div>
               <div class="w-1/3 chart_wrapper">
-                  <h1 class="text-center text-cyan-700">Leads week statistics</h1>
+                 <Title title="Leads week statistics" />
                   <div id="leads_week_statistics" class=""></div>
               </div>
               <div class="w-1/3 chart_wrapper">
-                  <h1 class="text-center text-cyan-700">Deals week statistics</h1>
+                 <Title title="Deals week statistics" />
                   <div id="deals_week_statistics" class=""></div>
               </div>
           </div>
            <div class="flex w-full">
-               <div id="deals_chart" class="w-1/3 mt-5"></div>
+               <div  class="w-1/3 mt-5">
+                 <Title title="COUNTRY/CITY ACTIVITY" />
+                 <div id="deals_chart"></div>
+               </div>
                <div class="w-1/3 chart_wrapper mt-5">
+                  <Title title="Tasks list" />
                    <TaskList :tasks="tasks_list" />
                </div>
                <div v-if="user_role === 'ADMIN'" class="w-1/3 ">
-                   <div class="text-center text-cyan-700">
-                       <h1 class="font-medium font-bold"><span class="border-2 p-1 rounded border-cyan-600">Calls</span></h1>
+                   <div class="text-center mt-5 text-cyan-700">
+                     <Title title="CALLS" />
                    </div>
                    <div class="p-2">
+
                        <AudioCard :audio="call_logs" />
+
                    </div>
                </div>
            </div>
@@ -186,6 +193,11 @@ export default {
 </template>
 
 <style scoped lang="scss">
+.apexcharts-text:hover {
+  fill: black !important;
+  color: #000 !important;
+}
+
 .dashboard_wrapper {
     .chart_wrapper {
         margin-left: 20px;

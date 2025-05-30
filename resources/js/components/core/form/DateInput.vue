@@ -22,6 +22,7 @@ export default {
         };
     },
     mounted() {
+      console.log('here date');
         if (this.format) {
             this.dateFormat = this.format
         }
@@ -53,6 +54,7 @@ export default {
             {{ label }}
         </label>
         <VueDatePicker
+            class="dark:bg-gray-800"
             :time-picker="time_picker"
             :format="dateFormat"
             :min-date="no_past_date ? new Date() : null"
@@ -65,6 +67,9 @@ export default {
 
 <style lang="scss">
 .relative {
+  .dp__pointer {
+    background-color: rgb(75 85 99 / var(--tw-border-opacity, 1));
+  }
     .error_wrapper {
         text-align: right;
         z-index: 1000;
@@ -88,9 +93,8 @@ export default {
 }
 
 .dp__input_wrap {
-
     input {
-        color: #082f49 var(--tw-gradient-to-position);
+        color: #fff;
         font-size: 0.875rem;
     }
 }

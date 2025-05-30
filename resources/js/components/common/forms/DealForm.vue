@@ -325,30 +325,30 @@ export default {
                 <hr class="h-px my-1 bg-gray-200 border-0 dark:bg-gray-700">
             </div>
             <div class="col-span-4">
-                <div class="w-2/3 mx-auto">
+                <div class="w-3/3 mx-auto">
                     <div class="flex justify-between">
                         <CheckboxInput
                             @update:state="updateCheckbox('pick_up')"
-                            class="border border-gray-300 rounded"
+                            class="border border-gray-300 rounded m-2 p-2"
                             :state="form.pick_up"
                             :text="'Pick up'" />
                         <CheckboxInput
                             @update:state="updateCheckbox('delivery')"
                             :state="form.delivery"
-                            class="border border-gray-300 rounded"
+                            class="border border-gray-300 rounded m-2 p-2"
                             :text="'Delivery'" />
                         <CheckboxInput
                             @update:state="updateCheckbox('haz')"
                             :state="form.haz"
-                            class="border border-gray-300 rounded" :text="'HAZ'" />
+                            class="border border-gray-300 rounded m-2 p-2" :text="'HAZ'" />
                         <CheckboxInput
                             @update:state="updateCheckbox('tarp')"
                             :state="form.tarp"
-                            class="border border-gray-300 rounded" :text="'TARP'" />
+                            class="border border-gray-300 rounded m-2 p-2" :text="'TARP'" />
                         <CheckboxInput
                             @update:state="updateCheckbox('temp')"
                             :state="form.temp"
-                            class="border border-gray-300 rounded" :text="'TEMP'" />
+                            class="border border-gray-300 rounded m-2 p-2" :text="'TEMP'" />
                     </div>
                 </div>
             </div>

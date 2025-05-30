@@ -154,11 +154,13 @@ export default {
                                     class="tooltip_wrapper">
                                     <ul :ref="'tooltip_' + item.id + key"
                                         class="list-none absolute
-                                                w-[100%] overflow-hidden
+                                                 overflow-hidden
                                                 p-1 rounded-[10px] bg-gray-100">
                                         <li v-for="text in value"
-                                            class="mb-1 text-xs float-left">
-                                            <Badge :text="text.replace(/^,+/, '')" />
+                                            class="mb-1 ml-1 text-xs float-left">
+                                            <Badge
+                                                width="p-0.5 pl-1 pr-1"
+                                                :text="text.replace(/^,+/, '')" />
                                         </li>
                                     </ul>
                                 </div>
@@ -234,10 +236,16 @@ export default {
 <style scoped lang="scss">
 .tooltip_wrapper {
     ul {
+        background-color: #6B7280;
         z-index: 100;
         top: 0;
-        right: -100px;
+        left: 70px;
         display: none;
+      li {
+        display: block;
+        font-size: 10px;
+        vertical-align: bottom;
+      }
     }
 }
 

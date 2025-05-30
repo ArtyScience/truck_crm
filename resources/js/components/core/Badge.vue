@@ -21,11 +21,8 @@ export default {
 
 <template>
     <div class="badge_wrapper
-           text-xs
-          font-medium
           dark:text-blue-300 rounded dark:bg-blue-900"
-          :class="color, width"
-    >
+          :class="color, width">
         {{ text }}
         <slot name="icon"></slot>
     </div>

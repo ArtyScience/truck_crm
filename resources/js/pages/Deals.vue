@@ -308,14 +308,14 @@ export default {
                                 @end="saveDeal"
                                 @change="prepareDeal"
                                 :itemKey="status"
-                                class="list rounded">
+                                class="list rounded dark:bg-gray-800">
                                 <template #item="{ element }">
                                     <div :id="element.id" class="list-group-item">
-                                        <div :id="'card_'+element.id" class="deal-card">
+                                        <div :id="'card_'+element.id" class="deal-card dark:bg-gray-700">
                                             <div class="deal-header">
                                                 <div class="absolute right-0.5 top-0.5">
                                                     <Badge
-                                                        color="text-sky-900"
+                                                        class="dark:text-white dark:bg-sky-900"
                                                         width="px-0.5 py-0"
                                                         :title="element.title">
                                                         <template #icon>
@@ -324,14 +324,14 @@ export default {
                                                     </Badge>
                                                 </div>
                                                 <div class="text-center" v-html="element.title" />
-
                                             </div>
-                                            <div class="deal_options flex justify-between mt-1 mb-1">
+                                            <div class="deal_options flex justify-between mt-1 mb-1 p-2">
                                                 <div class="float-left">
 <!--                                                    TODO: Implement Dynamic task list-->
-                                                    <Badge
-                                                        title="Deal Unique ID"
-                                                        :text="element.id" />
+                                                <Badge
+                                                    width="px-1 py-0"
+                                                    title="Deal Unique ID"
+                                                    :text="element.id" />
                                                 </div>
                                                 <div class="text-green-600">
                                                     <ArrowCircleUpIcon class="w-3 float-left" />
@@ -444,6 +444,27 @@ export default {
     white-space: nowrap;
     overflow-x: scroll;
     overflow-y: hidden;
+
+  /*CUSTOM SCROLLBAR SETTINGS*/
+  /* Scrollbar Track */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  /* Scrollbar Track Background */
+  &::-webkit-scrollbar-track {
+    background: #374151;
+    border-radius: 6px;
+  }
+  /* Scrollbar Thumb */
+  &::-webkit-scrollbar-thumb {
+    background-color: #1F2937;
+    border-radius: 6px;
+    border: 1px solid #0B4161; /* Space around thumb */
+  }
+  /* Scrollbar Thumb on Hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
     .drag_lists {
         &:first-child {
             .statuses_wrapper {
@@ -530,6 +551,7 @@ export default {
     .list_wrapper {
         min-width: 250px;
         float: left;
+        margin-top: 15px;
         .statuses_wrapper {
             margin-top: 15px;
             display: flex;
@@ -555,11 +577,34 @@ export default {
         text-align: center;
         max-height: 700px;
         overflow-y: scroll;
+        padding-right: 3px;
+        margin-top: 20px;
+        padding-bottom: 200px;
+
+        /*CUSTOM SCROLLBAR SETTINGS*/
+        /* Scrollbar Track */
+        &::-webkit-scrollbar {
+          width: 8px;
+        }
+        /* Scrollbar Track Background */
+        &::-webkit-scrollbar-track {
+          background: #374151;
+          border-radius: 6px;
+        }
+        /* Scrollbar Thumb */
+        &::-webkit-scrollbar-thumb {
+          background-color: #1F2937;
+          border-radius: 6px;
+          border: 1px solid #0B4161; /* Space around thumb */
+        }
+        /* Scrollbar Thumb on Hover */
+        &::-webkit-scrollbar-thumb:hover {
+          background-color: #555;
+        }
         .list {
             min-height: 700px;
-            border: 1px solid #ddd;
-            padding: 10px 0px;
-            background-color: #f9f9f9;
+            padding: 0px 10px;
+            //background-color: #f9f9f9;
         }
     }
 }
@@ -571,10 +616,8 @@ export default {
 .deal-card {
     overflow: hidden;
     width: 235px;
-    border: 1px solid #ddd;
     border-radius: 10px;
     padding: 15px;
-    background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
     cursor: pointer;
@@ -589,7 +632,7 @@ export default {
     font-size: 10px;
     font-weight: bold;
     color: #333;
-    margin-bottom: 5px;
+    margin: 5px 0px 5px;
     padding: 0px 5px;
     border-radius: 10px;
     background-color: #f1f5f9;

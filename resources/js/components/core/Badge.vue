@@ -20,8 +20,7 @@ export default {
 </script>
 
 <template>
-    <div class="badge_wrapper
-          dark:text-blue-300 rounded dark:bg-blue-900"
+    <div class="badge_wrapper rounded"
           :class="color, width">
         {{ text }}
         <slot name="icon"></slot>

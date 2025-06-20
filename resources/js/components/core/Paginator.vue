@@ -106,7 +106,7 @@ export default {
         border-radius: 100px;
     }
     button.active {
-        color: gold;
+        color: #CA8A04;
         font-weight: bold;
         border-top: 2px solid #112d4e;
         box-shadow: 0px 1px 3px black;

@@ -40,10 +40,7 @@ export default {
 </script>
 
 <template>
-    <div class="task_list_wrapper max-w-lg mx-auto my-auto bg-white  pt-2 pr-2 rounded-xl shadow shadow-slate-300">
-        <div class="text-center text-cyan-700">
-            <h1 class="font-medium font-bold"><span class="border-2 p-1 rounded border-cyan-600">TASKS LIST</span></h1>
-        </div>
+    <div class="task_list_wrapper max-w-lg mx-auto my-auto bg-white  pt-2 pr-2 mt-12 shadow shadow-slate-300">
         <div class="my-5 tasks_wrapper">
             <div class="flex flex-row justify-around items-center text-sm">
                 <div class="font-bold">NAME</div>
@@ -86,8 +83,28 @@ export default {
 
 <style scoped lang="scss">
 .task_list_wrapper {
-    max-height: 400px;
-    overflow-x: scroll;
+    background-color: #004D61;
+    //max-height: max-content;
+    overflow-y: scroll;
     padding: 10px;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  /* Scrollbar Track Background */
+  &::-webkit-scrollbar-track {
+    background: #374151;
+    border-radius: 6px;
+  }
+  /* Scrollbar Thumb */
+  &::-webkit-scrollbar-thumb {
+    background-color: #1F2937;
+    border-radius: 6px;
+    border: 1px solid #0B4161; /* Space around thumb */
+  }
+  /* Scrollbar Thumb on Hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
 }
 </style>

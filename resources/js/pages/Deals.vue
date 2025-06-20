@@ -293,10 +293,11 @@ export default {
                      ref="scrollContainer">
                 <div v-for="(deal, status) in status_deals_list" class="p-0 drag_lists">
                     <div class="list_wrapper p-0.5 float-left">
-                        <div class="statuses_wrapper">
-                            <div class="p-0 status">
-                                <span class="text_color"> {{ status.replace(/_/g, ' ') }} </span>
-                            </div>
+                        <div class="statuses_wrapper w-[80%] m-auto">
+                          <span class="w-10/12">{{ status.replace(/_/g, ' ') }}</span>
+                          <span class="w-2/12 p-0 status mt-1">
+                            <div class="text_color"></div>
+                          </span>
                         </div>
                         <div class="item">
                             <draggable
@@ -359,12 +360,12 @@ export default {
                                                 </div>
                                             </div>
                                             <div class="deal-date">
-                                                <code style="font-size: 8px">created: </code>
-                                                {{ element.created_at }}</div>
+                                                <code class="dark:text-slate-300" style="font-size: 8px">created: </code>
+                                                <span class="dark:text-slate-100" >{{ element.created_at }}</span>
+                                            </div>
                                             <div class="deal-actions">
                                                 <Badge
-                                                    color="bg-sky-800 text-blue-100"
-                                                    width="px-1 py-0"
+                                                    width="px-2 py-0"
                                                     title="Tasks number"
                                                     :text="element.tasks ? element.tasks : 0" />
 
@@ -664,12 +665,12 @@ export default {
 
 .deal-actions {
     margin-top: 20px;
+    font-size: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 4px 5px;
     border-radius: 10px;
-    background-color: #f1f5f9;
+    background-color: transparent;
 }
 
 .activity-link {

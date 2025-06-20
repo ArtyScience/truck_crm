@@ -1,20 +1,25 @@
 <script>
+import NoCallsImg from '../../../../../public/images/icons/no_calls.svg'
+
 export default {
   name: "AudioCard",
+  components: {
+    NoCallsImg
+  },
   props: {
     audio: [Array, Object]
+  },
+  data() {
+    return {
+      no_phone: NoCallsImg
+    }
   },
   mounted() {
   },
   methods: {
     parseDateTime(date_time) {
-      // Input datetime string
       const datetimeString = date_time;
-
-// Step 1: Parse the datetime string
       const date = new Date(datetimeString);
-
-// Step 2: Extract the components
       const hours = date.getUTCHours(); // Use getUTCHours() for UTC hours
       const minutes = date.getUTCMinutes(); // Use getUTCMinutes() for UTC minutes
       const year = date.getUTCFullYear(); // Use getUTCFullYear() for UTC year
@@ -32,14 +37,15 @@ export default {
 
 <template>
   <div class="audio_card_wrapper">
-
     <table
-        style="border: 1px solid transparent; max-width: 820px; border-radius: 10px; color: #fff; line-height: .4; font-family: InterVariable, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';"
-        bgcolor="#87387b" cellspacing="0" cellpadding="0" border="0" width="100%">
+        v-if="audio.length > 0"
+        class="audio_card_content" border="0" width="100%">
      <tbody>
      <tr height="10"></tr>
-     <tr v-for="item in audio">
-       <td width="15"></td>
+     <tr
+         v-for="item in audio"
+     >
+       <td width="15">{{item.length}}</td>
        <td width="15"></td>
        <td>
          <h3 class="mb-2 mt-4">{{ item.from }} -> {{ item.to }} ({{ item.status }}) </h3>
@@ -87,12 +93,46 @@ export default {
      <tr height="7.5"></tr>
      </tbody>
     </table>
+    <div v-else class="flex justify-center">
+      <p class="text-right ml-3 mr-10">You do not have any calls yet</p>
+      <div v-if="no_phone" class="text-left"><img :src="no_phone"></div>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
   .audio_card_wrapper {
+    margin-top: 30px;
     max-height: 500px;
-    overflow: scroll;
+
+
+    .audio_card_content {
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+      /* Scrollbar Track Background */
+      &::-webkit-scrollbar-track {
+        background: #374151;
+        border-radius: 6px;
+      }
+      /* Scrollbar Thumb */
+      &::-webkit-scrollbar-thumb {
+        background-color: #1F2937;
+        border-radius: 6px;
+        border: 1px solid #0B4161; /* Space around thumb */
+      }
+      /* Scrollbar Thumb on Hover */
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: #555;
+      }
+
+      background-color: #004D61;
+      border: 1px solid transparent;
+      max-width: 820px;
+      border-radius: 10px;
+      color: #fff;
+      line-height: .4;
+    }
   }
 </style>

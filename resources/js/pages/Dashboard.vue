@@ -131,7 +131,7 @@ export default {
             title: {
                 text: 'LEADS BY STATE',
             },
-            colors: ['#1a5d44']
+            colors: ['#004D61']
         };
 
         var chart = new ApexCharts(document.querySelector("#deals_chart"), options3);
